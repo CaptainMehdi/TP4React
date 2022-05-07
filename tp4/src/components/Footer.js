@@ -7,10 +7,19 @@ const Footer = () =>{
         <div className="footer">
             <ul onClick={() => window.location.reload()}>
                 <Link to="/documents">
-                    <li className="navlinks">Ajouter un document</li>
+                    <button className="navlinks">Ajouter un document</button>
                 </Link>
                 <Link to="/clients" >
-                    <li className="navlinks" >Ajouter un client</li>
+                    <button className="navlinks" >Ajouter un client</button>
+                </Link>
+                <Link to="/emprunts">
+                    <button className="navlinks">Ajouter un emprunt</button>
+                </Link>
+                <Link to="/retourEmprunt">
+                    <button className="navlinks">Retourner un document</button>
+                </Link>
+                <Link to="/user">
+                    <button className="navlinks">Choix Utilisateur</button>
                 </Link>
             </ul>
         </div>

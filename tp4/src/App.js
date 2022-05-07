@@ -5,8 +5,11 @@ import Clients from "./components/Clients";
 import HomePage from "./components/HomePage";
 import Footer from "./components/Footer";
 import Documents from "./components/Documents";
+import ChoixUser from "./components/ChoixUser";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-
+import Emprunts from "./components/Emprunts";
+import RetourEmprunt from "./components/RetourEmprunt";
+import Routage from "./components/Routage";
 
 function App() {
     return (
@@ -14,16 +17,7 @@ function App() {
             <div className="App-header">
                 <Header title="Bibliotheque"/>
             </div>
-            <Router >
-                <div className="container">
-                    <Switch>
-                        <Route exact path="/" component={HomePage}/>
-                        <Route exact path="/clients" component={Clients}/>
-                        <Route exact path="/documents" component={Documents}/>
-                    </Switch>
-                </div>
-                <Footer/>
-            </Router>
+            <Routage />
         </div>
 
     );
