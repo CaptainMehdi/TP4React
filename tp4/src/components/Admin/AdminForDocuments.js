@@ -1,5 +1,5 @@
 import React from "react";
-import Footer from "./Footer";
+import FooterAdmin from "./FooterAdmin";
 
 const Documents = () => {
     return (
@@ -20,7 +20,7 @@ const Documents = () => {
 
                 </ul>
             </div>
-            <Footer/>
+            <FooterAdmin/>
         </div>
 
     )

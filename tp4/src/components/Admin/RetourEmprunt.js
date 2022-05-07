@@ -1,5 +1,5 @@
 import React from "react";
-import Footer from "./Footer";
+import FooterAdmin from "./FooterAdmin";
 
 const RetourEmprunt = () =>{
     return (
@@ -7,7 +7,7 @@ const RetourEmprunt = () =>{
             <div className="container">
                 retour
             </div>
-            <Footer/>
+            <FooterAdmin/>
         </div>
 
     )

@@ -1,5 +1,5 @@
 import React from "react";
-import Footer from "./Footer";
+import FooterAdmin from "./FooterAdmin";
 
 const Clients = () => {
     return (
@@ -9,13 +9,12 @@ const Clients = () => {
                     <h2>Vous pouvez voir tous les clients et on ajoutait</h2>
                     <p className="textDoc">Choissisais le type de client :</p>
                     <ul className="textDoc">
-                        <li>Appuyer sur ce boutton pour ajouter un Livre
+                        <li>Appuyer sur ce boutton pour ajouter un Clients
                             <button className="bouttonAjout">Cree</button>
                         </li>
                     </ul>
                 </div>
             </div>
-            <Footer/>
         </div>
 
 

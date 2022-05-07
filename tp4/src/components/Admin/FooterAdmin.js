@@ -1,24 +1,24 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-const Footer = () =>{
+const FooterAdmin = () =>{
 
     return  (
         <div className="footer">
             <ul onClick={() => window.location.reload()}>
-                <Link to="/documents">
+                <Link class="btnlien" to="/documents">
                     <button className="navlinks">Ajouter un document</button>
                 </Link>
-                <Link to="/clients" >
+                <Link class="btnlien" to="/clients" >
                     <button className="navlinks" >Ajouter un client</button>
                 </Link>
-                <Link to="/emprunts">
+                <Link class="btnlien" to="/emprunts">
                     <button className="navlinks">Ajouter un emprunt</button>
                 </Link>
-                <Link to="/retourEmprunt">
+                <Link class="btnlien" to="/retourEmprunt">
                     <button className="navlinks">Retourner un document</button>
                 </Link>
-                <Link to="/user">
+                <Link class="btnlien" to="/user">
                     <button className="navlinks">Choix Utilisateur</button>
                 </Link>
             </ul>
@@ -26,4 +26,4 @@ const Footer = () =>{
     )
 }
 
-export default Footer
+export default FooterAdmin

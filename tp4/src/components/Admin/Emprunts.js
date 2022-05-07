@@ -1,5 +1,5 @@
 import React from "react";
-import Footer from "./Footer";
+import FooterAdmin from "./FooterAdmin";
 
 const Emprunts = () => {
     return (
@@ -7,7 +7,7 @@ const Emprunts = () => {
             <div className="container">
                 emprunts
             </div>
-            <Footer/>
+            <FooterAdmin/>
         </div>
 
 
