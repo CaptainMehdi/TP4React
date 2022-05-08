@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/TP4React.iml" filepath="$PROJECT_DIR$/.idea/TP4React.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tp4/Spring/tp4.iml" filepath="$PROJECT_DIR$/tp4/Spring/tp4.iml" />
     </modules>
   </component>
 </project>
