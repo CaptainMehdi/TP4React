@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Liste De Clients</h1>
+<table>
+    <thead>
+    <th>Id</th>
+    <th>Nom</th>
+    <th>Prenom</th>
+    <th>Adresse</th>
+    </thead>
+    <tbody>
+        <th:block th:each="client, stat : ${clients}">
+            <tr>
+                <td th:text="${client.getId}">Id</td>
+                <td th:text="${client.getNom()}">nom</td>
+                <td th:text="${client.getPrenom()}">prenom</td>
+                <td th:text="${client.getAddress()}">adresse</td>
+            </tr>
+        </th:block>
+    </tbody>
+</table>
+<a th:href="@{'/clientcreate'}">Cree un nouveau client</a><br>
+<a th:href="@{'/'}">Revenir a l'acceuil</a>
+</body>
+</html>

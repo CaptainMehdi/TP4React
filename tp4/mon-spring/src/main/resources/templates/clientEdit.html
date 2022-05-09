@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Creation d'un nouveau client</h1>
+<form action="#" th:action="@{/clientcreate}" th:object="${clientForm}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <table border="1" >
+        <tr>
+            <td><label>Nom</label></td>
+            <td><input type="text" th:field="*{nom}"/></td>
+            <td th:if="${#fields.hasErrors('nom')}"/>Nom invalide</td>
+        </tr>
+        <tr>
+            <td><label>Prenom</label></td>
+            <td><input type="text" th:field="*{prenom}"/></td>
+            <td th:if="${#fields.hasErrors('prenom')}"/>Prenom invalide</td>
+        </tr>
+        <tr>
+            <td><label>Address</label></td>
+            <td><input type="text" th:field="*{adresse}"/></td>
+            <td th:if="${#fields.hasErrors('adresse')}"/>Adresse invalide</td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Sauve" /></td>
+        </tr>
+    </table>
+</form>
+<a th:href="@{'/clients'}">Voir la liste des clients</a><br>
+<a th:href="@{'/'}">Revenir a l'acceuil</a>
+</body>
+</html>

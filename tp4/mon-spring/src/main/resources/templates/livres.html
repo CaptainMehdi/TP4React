@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Listes des livres</h1>
+<table>
+  <thead>
+  <th>ID</th>
+  <th>Titre</th>
+  <th>Auteur</th>
+  <th>Annee de Publication</th>
+  <th>Categorie</th>
+  <th>Disponibilite</th>
+  <th>Editeur</th>
+  <th>Nombre de Page</th>
+  </thead>
+  <tbody>
+  <th:block th:each="livre, stat : ${livres}">
+    <tr>
+      <td th:text="${livre.getId()}">id</td>
+      <td th:text="${livre.getTitre()}">titre</td>
+      <td th:text="${livre.getAuteur()}">auteur</td>
+      <td th:text="${livre.getDatePublication()}">publication</td>
+      <td th:text="${livre.getCategorie()}">categorie</td>
+      <td th:text="${livre.isDisponible()}">diponibilite</td>
+      <td th:text="${livre.getEditeur()}">editeur</td>
+      <td th:text="${livre.getNombrePage()}">Nombre de page</td>
+
+    </tr>
+  </th:block>
+  </tbody>
+</table>
+<a th:href="@{'/livrecreate'}">Cree un nouveau livre</a><br>
+<a th:href="@{'/'}">Revenir a l'acceuil</a>
+</body>
+</html>

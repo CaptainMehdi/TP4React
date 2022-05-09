@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Title</title>
+</head>
+<body>
+    <h1 th:text="${h1Text}">titre</h1>
+    <a th:href="@{'/clients'}">Voir la liste des clients</a><br>
+    <a th:href="@{'/livres'}">Voir la liste des livres</a><br>
+    <a th:href="@{'/emprunts'}">Voir la liste des emprunts</a><br>
+
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/empruntcreate}" th:object="${empruntForm}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <table border="1" >
+        <tr>
+            <td><label>DateEmprunt</label></td>
+            <td><input type="date" th:field="*{dateEmprunt}"/></td>
+            <td th:if="${#fields.hasErrors('dateEmprunt')}"/>Date Emprunt invalide</td>
+        </tr>
+        <tr>
+            <td><label>Id du Client</label></td>
+            <td><input type="number" th:field="*{clientId}"/></td>
+            <td th:if="${#fields.hasErrors('clientId')}"/>Ne peut pas etre vide</td>
+        </tr>
+        <tr>
+            <td><label>Id du Livre</label></td>
+            <td><input type="number" th:field="*{livreId}"/></td>
+            <td th:if="${#fields.hasErrors('livreId')}"/>Ne peut pas etre vide</td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Sauve" /></td>
+        </tr>
+    </table>
+</form>
+<a th:href="@{'/'}">Revenir a l'acceuil</a><br>
+<a th:href="@{'/emprunts'}">Voir la liste des emprunts</a>
+</body>
+</html>

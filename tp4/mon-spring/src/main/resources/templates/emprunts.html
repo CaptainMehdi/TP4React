@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Liste Emprunt</h1>
+<table>
+    <thead>
+    <th>ID Emprunt</th>
+    <th>Date d'emprunt</th>
+    <th>Date Retour</th>
+    <th>Id Client</th>
+    <th>Id Document</th>
+    </thead>
+    <tbody>
+    <th:block th:each="emprunt, stat : ${emprunts}">
+        <tr>
+            <td th:text="${emprunt.getId()}">id</td>
+            <td th:text="${emprunt.getDateEmprunt()}">dateEmprunt</td>
+            <td th:text="${emprunt.dateRetour}">dateRetour</td>
+            <td th:text="${emprunt.getClient().getId()}">client</td>
+            <td th:text="${emprunt.getDocument().getId()}">document</td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+<a th:href="@{'/empruntcreate'}">Cree un nouveau emprunt</a><br>
+<a th:href="@{'/'}">Revenir a l'acceuil</a>
+</body>
+</html>
