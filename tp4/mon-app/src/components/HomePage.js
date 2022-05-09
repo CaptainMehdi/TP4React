@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import AdminForClient from "./Admin/AdminForClient";
-import AdminForDocuments from "./Admin/AdminForDocuments";
+import AdminAddClient from "./Admin/AdminAddClient";
+import AdminAddDocuments from "./Admin/AdminAddDocuments";
 import Emprunts from "./Admin/Emprunts";
 import RetourEmprunt from "./Admin/RetourEmprunt";
 import ChoixUser from "./ChoixUser";

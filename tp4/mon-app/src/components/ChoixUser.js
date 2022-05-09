@@ -1,6 +1,6 @@
 import React from "react";
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
-import AdminForClient from "./Admin/AdminForClient";
+import AdminAddClient from "./Admin/AdminAddClient";
 import HomePage from "./HomePage";
 import PageClient from "./Client/PageClient";
 

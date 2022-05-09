@@ -3,8 +3,8 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/tp4/React" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/tp4/Spring" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/tp4/React/node_modules" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
