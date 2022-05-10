@@ -6,7 +6,7 @@ const FooterClient = () =>{
     return  (
         <div className="footer">
             <ul onClick={() => window.location.reload()}>
-                <Link class="btnlien" to="/user">
+                <Link className="btnlien" to="/user">
                     <button className="navlinks">Choix Utilisateur</button>
                 </Link>
             </ul>

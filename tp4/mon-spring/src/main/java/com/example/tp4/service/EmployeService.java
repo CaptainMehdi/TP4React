@@ -7,6 +7,7 @@ import com.example.tp4.model.document.Dvd;
 import com.example.tp4.model.document.Livre;
 import com.example.tp4.model.personne.Client;
 import com.example.tp4.repository.*;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import javax.swing.text.html.Option;

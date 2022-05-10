@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/todos")
+@CrossOrigin
 public class RootTodoController {
     Logger logger = LoggerFactory.getLogger(RootTodoController.class);
 
@@ -24,15 +25,12 @@ public class RootTodoController {
         this.employeService = employeService;
     }
 
-    @GetMapping("/todos")
-    @CrossOrigin(origins = "http://localhost:3001")
+    @GetMapping("/getAll")
     public List<Client> getAllCLients(){
-        logger.info("getAllClients");
         return employeService.findAllClient();
     }
 
-    @PostMapping
-    @CrossOrigin(origins = "http://localhost:3001")
+    @PostMapping("/add")
     public ResponseEntity<Client> createClient(@RequestBody Client newClient){
         logger.info("post - createClient "+ newClient);
         return employeService.saveClient(newClient)

@@ -18,10 +18,10 @@ const ChoixUser = () => {
             </Router>
             <ul onClick={() => window.location.reload()} style={{listStyleType:"none",textDecoration:"none"}}>
                 <li>
-                    <Link class="lien" to="/client" >Acceder en temps que Client<button className="btnUser" style={{backgroundColor:"blueviolet"}}>Client</button></Link>
+                    <Link className="lien" to="/client" >Acceder en temps que Client<button className="btnUser" style={{backgroundColor:"blueviolet"}}>Client</button></Link>
                 </li>
                 <li>
-                    <Link class="lien" to="/home">Acceder en temps que Admin<button className="btnUser" style={{backgroundColor:"cornflowerblue"}}>Admin</button></Link>
+                    <Link className="lien" to="/home">Acceder en temps que Admin<button className="btnUser" style={{backgroundColor:"cornflowerblue"}}>Admin</button></Link>
                 </li>
             </ul>
         </div>
