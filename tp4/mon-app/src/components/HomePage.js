@@ -1,10 +1,4 @@
 import React from "react";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import AdminAddClient from "./Admin/AdminAddClient";
-import AdminAddDocuments from "./Admin/AdminAddDocuments";
-import Emprunts from "./Admin/Emprunts";
-import RetourEmprunt from "./Admin/RetourEmprunt";
-import ChoixUser from "./ChoixUser";
 import FooterAdmin from "./Admin/FooterAdmin";
 
 const HomePage = () =>{

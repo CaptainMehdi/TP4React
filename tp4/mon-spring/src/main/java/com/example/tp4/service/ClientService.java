@@ -5,10 +5,11 @@ import com.example.tp4.model.document.Document;
 import com.example.tp4.model.personne.Client;
 import com.example.tp4.repository.*;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class ClientService {
     private ClientRepository clientRepository;
     private LivreRepository livreRepository;

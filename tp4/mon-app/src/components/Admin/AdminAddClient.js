@@ -37,14 +37,20 @@ const AdminAddClient = () => {
     }
 
     useEffect(() => {
-        console.log("Every things okay")
-        fetch("http://localhost:2002/todos").
-        then(res => res.json()).
-        then((result) => {
-            setClients(result)
-            console.log(result)
-        })
-    },[])
+        const getClients = async () => {
+            const tasksFromServer = await fetchClient()
+            setClients(tasksFromServer)
+
+        }
+        getClients()
+    }, [])
+
+    const fetchClient = async () => {
+        const res = await fetch('http://localhost:2002/todos/getAll')
+        const data = await res.json()
+        return data
+    }
+
 
     return (
         <div>
@@ -76,16 +82,13 @@ const AdminAddClient = () => {
                 <div style={{margin: "5px"}}>
                     Liste de Clients :
                     <br/>
-                    <h1>Clients</h1>
-                    <div>
-                        {clients.map(client => (
-                            <div>
-                                {client.nom}
-                            </div>
-                            ))}
-
-                    </div>
-
+                    {clients.map((client) =>(
+                        <div key={client.id}>
+                            {client.nom}
+                            {client.prenom}
+                            {client.adresse}
+                        </div>
+                    ))}
                 </div>
             </div>
             <FooterAdmin/>

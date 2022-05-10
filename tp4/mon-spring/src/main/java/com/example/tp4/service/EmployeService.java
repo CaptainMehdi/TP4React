@@ -1,5 +1,6 @@
 package com.example.tp4.service;
 
+import com.example.tp4.DTO.ClientDTO;
 import com.example.tp4.model.Emprunt;
 import com.example.tp4.model.document.Cd;
 import com.example.tp4.model.document.Document;
@@ -9,15 +10,17 @@ import com.example.tp4.model.personne.Client;
 import com.example.tp4.repository.*;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 public class EmployeService {
     private final int EMPRUNT_LIVRE_EN_JOURNEE = 21;
     private final int EMPRUNT_CD_EN_JOURNEE = 14;
@@ -39,121 +42,129 @@ public class EmployeService {
         this.empruntRepository = empruntRepository;
     }
 
-    public Optional<Client> saveClient(Client client) {
-        return Optional.of(clientRepository.save(client));
+    public ClientDTO saveClient(Client client) {
+        clientRepository.save(client);
+        return new ClientDTO(client);
     }
 
     public Client saveClient(String nom, String prenom, String adresse) {
-        return clientRepository.save(new Client(nom, prenom, adresse));
+        Client c = new Client(nom, prenom, adresse);
+        ClientDTO dtoC = new ClientDTO(c);
+        return clientRepository.save(dtoC.DTOtoClient());
     }
 
-    public Livre saveLivre(Livre livre) {
-        return livreRepository.save(livre);
-    }
+//    public Livre saveLivre(Livre livre) {
+//        return livreRepository.save(livre);
+//    }
+//
+//    public Livre saveLivre(String titre, String auteur, int datePublication, String categorie, boolean dispo, String editeur, int nombrePage) {
+//        return livreRepository.save(new Livre(titre, auteur, datePublication, categorie, dispo, editeur, nombrePage));
+//    }
+//
+//    public Dvd saveDvd(Dvd dvd) {
+//        return dvdRepository.save(dvd);
+//    }
+//
+//    public Dvd saveDvd(String titre, String auteur, int datePublication, String categorie, boolean dispo, int duree) {
+//        return dvdRepository.save(new Dvd(titre, auteur, datePublication, categorie, dispo, duree));
+//    }
+//
+//    public Cd saveCd(Cd cd) {
+//        return cdRepository.save(cd);
+//    }
+//
+//    public Cd saveCd(String titre, String auteur, int datePublication, String categorie, boolean dispo, int duree) {
+//        return cdRepository.save(new Cd(titre, auteur, datePublication, categorie, dispo, duree));
+//    }
+//
+//    @Transactional
+//    public Emprunt createEmprunt(Client client, Document document) throws Exception {
+//        if (!document.isDisponible()) {
+//            throw new Exception("Le document est deja emprunte");
+//        }
+//        setDureeDocument(document);
+//        Emprunt emprunt = new Emprunt(LocalDate.now(), client, document);
+//        emprunt.setDateRetour(LocalDate.now().plusDays(document.getDureeEmprunt()));
+//        client.addEmprunt(emprunt);
+//        document.setDisponible(false);
+//
+//        return emprunt;
+//    }
 
-    public Livre saveLivre(String titre, String auteur, int datePublication, String categorie, boolean dispo, String editeur, int nombrePage) {
-        return livreRepository.save(new Livre(titre, auteur, datePublication, categorie, dispo, editeur, nombrePage));
-    }
+//    @Transactional
+//    public Emprunt createEmprunt(long clientId, long documentId) throws Exception {
+//        var documentOptional = documentRepository.findById(documentId);
+//        var clientOptional = clientRepository.findById(clientId);
+//
+//        if (documentOptional.isEmpty() || clientOptional.isEmpty()) {
+//            throw new Exception("Pas le bon id de document ou du client");
+//        }
+//        var client = clientOptional.get();
+//        var document = documentOptional.get();
+//
+//        if (!document.isDisponible()) {
+//            throw new Exception("Le document est deja emprunte");
+//        }
+//
+//        setDureeDocument(document);
+//        Emprunt emprunt = new Emprunt(LocalDate.now(), client, document);
+//        emprunt.setDateRetour(LocalDate.now().plusDays(document.getDureeEmprunt()));
+//        client.addEmprunt(emprunt);
+//        document.setDisponible(false);
+//
+//        return emprunt;
+//    }
 
-    public Dvd saveDvd(Dvd dvd) {
-        return dvdRepository.save(dvd);
-    }
+//    @Transactional
+//    public void retourDocument(Emprunt emprunt) {
+//        LocalDate today = LocalDate.now();
+//        if (emprunt.getDateRetour().compareTo(today) < 0) {
+//            long differenceEnJour = ChronoUnit.DAYS.between(emprunt.getDateRetour(), today);
+//            emprunt.getClient().ajoutDette(differenceEnJour);
+//        }
+//        emprunt.getDocument().setDisponible(true);
+//
+//        clientRepository.save(emprunt.getClient());
+//        empruntRepository.save(emprunt);
+//    }
+//
+//    public void setDureeDocument(Document document) {
+//        if (livreRepository.findById(document.getId()).isPresent()) {
+//            document.setDureeEmprunt(EMPRUNT_LIVRE_EN_JOURNEE);
+//        } else if (dvdRepository.findById(document.getId()).isPresent()) {
+//            document.setDureeEmprunt(EMPRUNT_DVD_EN_JOURNEE);
+//        } else {
+//            document.setDureeEmprunt(EMPRUNT_CD_EN_JOURNEE);
+//        }
+//    }
 
-    public Dvd saveDvd(String titre, String auteur, int datePublication, String categorie, boolean dispo, int duree) {
-        return dvdRepository.save(new Dvd(titre, auteur, datePublication, categorie, dispo, duree));
-    }
-
-    public Cd saveCd(Cd cd) {
-        return cdRepository.save(cd);
-    }
-
-    public Cd saveCd(String titre, String auteur, int datePublication, String categorie, boolean dispo, int duree) {
-        return cdRepository.save(new Cd(titre, auteur, datePublication, categorie, dispo, duree));
-    }
-
-    @Transactional
-    public Emprunt createEmprunt(Client client, Document document) throws Exception {
-        if (!document.isDisponible()) {
-            throw new Exception("Le document est deja emprunte");
+    public List<ClientDTO> findAllClient() {
+        List<ClientDTO> listeDTO = new ArrayList<>();
+        for(Client c : clientRepository.findAll()){
+            listeDTO.add(new ClientDTO(c));
         }
-        setDureeDocument(document);
-        Emprunt emprunt = new Emprunt(LocalDate.now(), client, document);
-        emprunt.setDateRetour(LocalDate.now().plusDays(document.getDureeEmprunt()));
-        client.addEmprunt(emprunt);
-        document.setDisponible(false);
 
-        return emprunt;
+        return listeDTO;
     }
 
-    @Transactional
-    public Emprunt createEmprunt(long clientId, long documentId) throws Exception {
-        var documentOptional = documentRepository.findById(documentId);
-        var clientOptional = clientRepository.findById(clientId);
-
-        if (documentOptional.isEmpty() || clientOptional.isEmpty()) {
-            throw new Exception("Pas le bon id de document ou du client");
-        }
-        var client = clientOptional.get();
-        var document = documentOptional.get();
-
-        if (!document.isDisponible()) {
-            throw new Exception("Le document est deja emprunte");
-        }
-
-        setDureeDocument(document);
-        Emprunt emprunt = new Emprunt(LocalDate.now(), client, document);
-        emprunt.setDateRetour(LocalDate.now().plusDays(document.getDureeEmprunt()));
-        client.addEmprunt(emprunt);
-        document.setDisponible(false);
-
-        return emprunt;
-    }
-
-    @Transactional
-    public void retourDocument(Emprunt emprunt) {
-        LocalDate today = LocalDate.now();
-        if (emprunt.getDateRetour().compareTo(today) < 0) {
-            long differenceEnJour = ChronoUnit.DAYS.between(emprunt.getDateRetour(), today);
-            emprunt.getClient().ajoutDette(differenceEnJour);
-        }
-        emprunt.getDocument().setDisponible(true);
-
-        clientRepository.save(emprunt.getClient());
-        empruntRepository.save(emprunt);
-    }
-
-    public void setDureeDocument(Document document) {
-        if (livreRepository.findById(document.getId()).isPresent()) {
-            document.setDureeEmprunt(EMPRUNT_LIVRE_EN_JOURNEE);
-        } else if (dvdRepository.findById(document.getId()).isPresent()) {
-            document.setDureeEmprunt(EMPRUNT_DVD_EN_JOURNEE);
-        } else {
-            document.setDureeEmprunt(EMPRUNT_CD_EN_JOURNEE);
-        }
-    }
-
-    public List<Client> findAllClient() {
-        return clientRepository.findAll();
-    }
-
-    public Optional<Client> findClientById(long id) {
-        return clientRepository.findById(id);
-    }
-
-    public List<Livre> findAllLivre() {
-        return livreRepository.findAll();
-    }
-
-    public Optional<Livre> findLivreById(long id) {
-        return livreRepository.findById(id);
-    }
-
-    public List<Emprunt> findAllEmprunt() {
-        return empruntRepository.findAll();
-    }
-
-    public Optional<Emprunt> findEmpruntById(long empruntId) {
-        return empruntRepository.findById(empruntId);
-    }
+//    public Optional<Client> findClientById(long id) {
+//        return clientRepository.findById(id);
+//    }
+//
+//    public List<Livre> findAllLivre() {
+//        return livreRepository.findAll();
+//    }
+//
+//    public Optional<Livre> findLivreById(long id) {
+//        return livreRepository.findById(id);
+//    }
+//
+//    public List<Emprunt> findAllEmprunt() {
+//        return empruntRepository.findAll();
+//    }
+//
+//    public Optional<Emprunt> findEmpruntById(long empruntId) {
+//        return empruntRepository.findById(empruntId);
+//    }
 
 }

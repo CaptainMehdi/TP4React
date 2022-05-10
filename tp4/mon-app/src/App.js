@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './components/Header';
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import ChoixUser from "./components/ChoixUser";
 import HomePage from "./components/HomePage";
 import PageClient from "./components/Client/PageClient";
@@ -18,16 +18,16 @@ function App() {
             </div>
             <Router>
                 <div>
-                    <Switch>
-                        <Route exact path="/" component={ChoixUser}/>
-                        <Route exact path="/home" component={HomePage}/>
-                        <Route exact path="/client" component={PageClient}/>
-                        <Route exact path="/clients" component={AdminAddClient}/>
-                        <Route exact path="/documents" component={AdminAddDocuments}/>
-                        <Route exact path="/emprunts" component={Emprunts} />
-                        <Route exact path="/retourEmprunt" component={RetourEmprunt}/>
-                        <Route exact path="/user" component={ChoixUser}/>
-                    </Switch>
+                    <Routes>
+                        <Route  path="/" element={<ChoixUser/>}/>
+                        <Route  path="/home" element={<HomePage/>}/>
+                        <Route  path="/client" element={<PageClient/>}/>
+                        <Route  path="/clients" element={<AdminAddClient/>}/>
+                        <Route  path="/documents" element={<AdminAddDocuments/>}/>
+                        <Route  path="/emprunts" element={<Emprunts/>} />
+                        <Route  path="/retourEmprunt" element={<RetourEmprunt/>}/>
+                        <Route  path="/user" element={<ChoixUser/>}/>
+                    </Routes>
                 </div>
             </Router>
         </div>
