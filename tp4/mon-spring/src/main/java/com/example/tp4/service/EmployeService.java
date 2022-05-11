@@ -128,23 +128,23 @@ public class EmployeService {
 
     @Transactional
     public EmpruntDTO createEmprunt(Emprunt emprunt) throws Exception {
-        EmpruntDTO empruntDTO = new EmpruntDTO( createEmprunt(emprunt.getClient(),emprunt.getDocument()));
+        EmpruntDTO empruntDTO = new EmpruntDTO( createEmprunt((long) emprunt.getClient().getId(),(long)emprunt.getDocument().getId()));
         return empruntDTO;
     }
 
-//    @Transactional
-//    public void retourDocument(Emprunt emprunt) {
-//        LocalDate today = LocalDate.now();
-//        if (emprunt.getDateRetour().compareTo(today) < 0) {
-//            long differenceEnJour = ChronoUnit.DAYS.between(emprunt.getDateRetour(), today);
-//            emprunt.getClient().ajoutDette(differenceEnJour);
-//        }
-//        emprunt.getDocument().setDisponible(true);
-//
-//        clientRepository.save(emprunt.getClient());
-//        empruntRepository.save(emprunt);
-//    }
-//
+    @Transactional
+    public void retourDocument(Emprunt emprunt) {
+        LocalDate today = LocalDate.now();
+        if (emprunt.getDateRetour().compareTo(today) < 0) {
+            long differenceEnJour = ChronoUnit.DAYS.between(emprunt.getDateRetour(), today);
+            emprunt.getClient().ajoutDette(differenceEnJour);
+        }
+        emprunt.getDocument().setDisponible(true);
+
+        clientRepository.save(emprunt.getClient());
+        empruntRepository.save(emprunt);
+    }
+
     public void setDureeDocument(Document document) {
         if (livreRepository.findById(document.getId()).isPresent()) {
             document.setDureeEmprunt(EMPRUNT_LIVRE_EN_JOURNEE);
@@ -164,10 +164,10 @@ public class EmployeService {
         return listeDTO;
     }
 
-//    public Optional<Client> findClientById(long id) {
-//        return clientRepository.findById(id);
-//    }
-//
+    public Optional<Client> findClientById(long id) {
+        return clientRepository.findById(id);
+    }
+
     public List<LivreDTO> findAllLivre() {
         List<LivreDTO> listeDTO = new ArrayList<>();
         for(Livre c : livreRepository.findAll()){
@@ -196,11 +196,6 @@ public class EmployeService {
     }
 
 
-//
-//    public Optional<Livre> findLivreById(long id) {
-//        return livreRepository.findById(id);
-//    }
-//
     public List<EmpruntDTO> findAllEmprunt() {
         List<EmpruntDTO> listeDTO = new ArrayList<>();
         for(Emprunt emprunt : empruntRepository.findAll()){
@@ -209,10 +204,6 @@ public class EmployeService {
 
         return listeDTO;
     }
-//
-//    public Optional<Emprunt> findEmpruntById(long empruntId) {
-//        return empruntRepository.findById(empruntId);
-//    }
 
     public List<DocumentDTO> findDocumentByTitre(String titre){
         List<DocumentDTO> listeDTO = new ArrayList<>();
@@ -235,37 +226,7 @@ public class EmployeService {
     public List<DocumentDTO> findAllDocument(){
         List<DocumentDTO> listeDTO = new ArrayList<>();
         for(Document document : documentRepository.findAll()){
-            listeDTO.add(new DocumentDTO(document) {
-                @Override
-                public String getId() {
-                    return super.getId();
-                }
-
-                @Override
-                public String getTitre() {
-                    return super.getTitre();
-                }
-
-                @Override
-                public String getAuteur() {
-                    return super.getAuteur();
-                }
-
-                @Override
-                public String getDatePublication() {
-                    return super.getDatePublication();
-                }
-
-                @Override
-                public String getCategorie() {
-                    return super.getCategorie();
-                }
-
-                @Override
-                public String getDisponible() {
-                    return super.getDisponible();
-                }
-            });
+            listeDTO.add(new DocumentDTO(document));
         }
 
         return listeDTO;
