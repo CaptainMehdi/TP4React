@@ -1,13 +1,16 @@
 import React from "react";
 import FooterAdmin from "./FooterAdmin";
 import {Link} from "react-router-dom";
+import ListLivre from "../ListDocument/ListLivre";
+import ListCd from "../ListDocument/ListCd";
+import ListDvd from "../ListDocument/ListDvd";
 
 const AdminAddDocuments = () => {
 
     return (
         <div>
             <div className="container">
-                <h2 className="textBienvenue">Vous pouvez voir tous les documents et on ajoutait</h2>
+                <h2 className="textBienvenue">Vous pouvez voir tous les documents et en ajouter</h2>
                 <p className="textDoc">Choissisais le type de documents :</p>
                 <ul className="textDoc">
                     <li>Appuyer sur ce boutton pour ajouter un Livre
@@ -24,8 +27,12 @@ const AdminAddDocuments = () => {
                 <div>
                     Liste de Documents :
                     <div>
-                        Les livres:
-
+                        Les Livres:
+                        <ListLivre />
+                        Les Cds:
+                        <ListCd/>
+                        Les Dvds:
+                        <ListDvd/>
                     </div>
                 </div>
             </div>

@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class DocumentDTO {
+public class DocumentDTO {
 
     private String id;
     private String titre;

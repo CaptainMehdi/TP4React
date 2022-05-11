@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "@types/react";
+import React, {useEffect, useState} from "react";
 
 const ListLivre = () =>{
     const [livres, setlivres] = useState([])

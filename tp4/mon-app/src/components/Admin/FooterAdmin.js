@@ -21,6 +21,9 @@ const FooterAdmin = () =>{
                 <Link className="btnlien" to="/user">
                     <button className="navlinks">Choix Utilisateur</button>
                 </Link>
+                <Link className="btnlien" to="/rechercheDocs">
+                    <button className="navlinks">Recherche documents</button>
+                </Link>
             </ul>
         </div>
     )

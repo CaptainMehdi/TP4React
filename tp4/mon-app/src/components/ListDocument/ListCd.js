@@ -19,7 +19,7 @@ const ListCd = () => {
     }
     return(
         <div>
-            {livres.map((livre) =>(
+            {cds.map((livre) =>(
                 <div className="tableElement" key={livre.id}>
                     <h5>ID: {livre.id}</h5>
                     <h5>Titre: {livre.titre}</h5>

@@ -21,7 +21,7 @@ const AdminAddClient = () => {
             alert('Ajouter le prenom')
             return
         } else if (!adresse) {
-            alert('Ajouter le adresse')
+            alert("Ajouter l'adresse")
             return
         }
         const client = {nom, prenom, adresse}
@@ -41,7 +41,6 @@ const AdminAddClient = () => {
         const getClients = async () => {
             const tasksFromServer = await fetchClient()
             setClients(tasksFromServer)
-
         }
         getClients()
     }, [])
@@ -68,7 +67,7 @@ const AdminAddClient = () => {
                     </div>
                     <div className='form-control'>
                         <label style={{margin: "5px"}}>Prenom</label>
-                        <input type='text' placeholder='prenomClient'
+                            <input type='text' placeholder='prenomClient'
                                value={prenom}
                                onChange={(e) => setPrenom(e.target.value)}/>
                     </div>

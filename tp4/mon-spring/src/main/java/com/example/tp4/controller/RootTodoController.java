@@ -1,19 +1,14 @@
 package com.example.tp4.controller;
 
 import com.example.tp4.DTO.*;
+import com.example.tp4.model.Emprunt;
 import com.example.tp4.model.document.Cd;
 import com.example.tp4.model.document.Dvd;
 import com.example.tp4.model.document.Livre;
 import com.example.tp4.model.personne.Client;
-import com.example.tp4.model.personne.Employe;
-import com.example.tp4.service.ClientService;
 import com.example.tp4.service.EmployeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,30 +26,42 @@ public class RootTodoController {
     }
 
     @GetMapping("/getAllClients")
-    public List<ClientDTO> getAllClients(){
+    public List<ClientDTO> getAllClients() {
         return employeService.findAllClient();
     }
 
     @PostMapping("/addClients")
-    public ClientDTO createClient(@RequestBody Client newClient){
-        logger.info("post - createClient "+ newClient);
+    public ClientDTO createClient(@RequestBody Client newClient) {
+        logger.info("post - createClient " + newClient);
         return employeService.saveClient(newClient);
     }
-//DOCUMENT
+
+    //DOCUMENT
+    @GetMapping("/getDocumentByTitre/{titre}")
+    public List<DocumentDTO> getDocumentByTitre(@PathVariable String titre) {
+        return employeService.findDocumentByTitre(titre);
+    }
+
+    @GetMapping("/getDocumentAuteur/{auteur}")
+    public List<DocumentDTO> getDocumentByAuteur(@PathVariable String auteur) {
+        System.out.println(auteur);
+        return employeService.findDocumentByAuteur(auteur);
+    }
+
     @GetMapping("/getAllDocument")
-    public List<DocumentDTO> getAllDocument(){
-    return employeService.findAllDocument();
-}
+    public List<DocumentDTO> getAllDocument() {
+        return employeService.findAllDocument();
+    }
 
     //Livre
     @GetMapping("/getAllLivres")
-    public List<LivreDTO> getAllLivre(){
+    public List<LivreDTO> getAllLivre() {
         return employeService.findAllLivre();
     }
 
     @PostMapping("/addLivres")
-    public LivreDTO createLivre(@RequestBody Livre newLivre){
-        logger.info("post - createLivre "+ newLivre);
+    public LivreDTO createLivre(@RequestBody Livre newLivre) {
+        logger.info("post - createLivre " + newLivre);
         return employeService.saveLivre(newLivre);
     }
 
@@ -62,7 +69,7 @@ public class RootTodoController {
     //Cd
 
     @GetMapping("/getAllCd")
-    public List<CdDTO> getAllCd(){
+    public List<CdDTO> getAllCd() {
         return employeService.findAllCd();
     }
 
@@ -75,7 +82,7 @@ public class RootTodoController {
     //DVD
 
     @GetMapping("/getAllDvd")
-    public List<DvdDTO> getAllDvd(){
+    public List<DvdDTO> getAllDvd() {
         return employeService.findAllDvd();
     }
 
@@ -85,5 +92,16 @@ public class RootTodoController {
         return employeService.saveDvd(newDvd);
     }
 
+//Emprunt
+    @GetMapping("/getAllEmprunt")
+    public List<EmpruntDTO> getAllEmprunt() {
+        return employeService.findAllEmprunt();
+    }
+
+    @PostMapping("/addEmprunt")
+    public EmpruntDTO createEmprunt(@RequestBody Emprunt newEmprunt) throws Exception {
+        logger.info("post - createEmprunt " + newEmprunt);
+        return employeService.createEmprunt(newEmprunt);
+    }
 
 }

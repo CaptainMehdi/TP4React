@@ -86,43 +86,51 @@ public class EmployeService {
         return cdRepository.save(cd);
     }
 
-//    @Transactional
-//    public Emprunt createEmprunt(Client client, Document document) throws Exception {
-//        if (!document.isDisponible()) {
-//            throw new Exception("Le document est deja emprunte");
-//        }
-//        setDureeDocument(document);
-//        Emprunt emprunt = new Emprunt(LocalDate.now(), client, document);
-//        emprunt.setDateRetour(LocalDate.now().plusDays(document.getDureeEmprunt()));
-//        client.addEmprunt(emprunt);
-//        document.setDisponible(false);
-//
-//        return emprunt;
-//    }
+    @Transactional
+    public Emprunt createEmprunt(Client client, Document document) throws Exception {
+        if (!document.isDisponible()) {
+            throw new Exception("Le document est deja emprunte");
+        }
+        setDureeDocument(document);
+        Emprunt emprunt = new Emprunt(LocalDate.now(), client, document);
+        emprunt.setDateRetour(LocalDate.now().plusDays(document.getDureeEmprunt()));
+        client.addEmprunt(emprunt);
+        document.setDisponible(false);
 
-//    @Transactional
-//    public Emprunt createEmprunt(long clientId, long documentId) throws Exception {
-//        var documentOptional = documentRepository.findById(documentId);
-//        var clientOptional = clientRepository.findById(clientId);
-//
-//        if (documentOptional.isEmpty() || clientOptional.isEmpty()) {
-//            throw new Exception("Pas le bon id de document ou du client");
-//        }
-//        var client = clientOptional.get();
-//        var document = documentOptional.get();
-//
-//        if (!document.isDisponible()) {
-//            throw new Exception("Le document est deja emprunte");
-//        }
-//
-//        setDureeDocument(document);
-//        Emprunt emprunt = new Emprunt(LocalDate.now(), client, document);
-//        emprunt.setDateRetour(LocalDate.now().plusDays(document.getDureeEmprunt()));
-//        client.addEmprunt(emprunt);
-//        document.setDisponible(false);
-//
-//        return emprunt;
-//    }
+        EmpruntDTO empruntDTO = new EmpruntDTO(emprunt);
+        return emprunt;
+    }
+
+    @Transactional
+    public Emprunt createEmprunt(long clientId, long documentId) throws Exception {
+        var documentOptional = documentRepository.findById(documentId);
+        var clientOptional = clientRepository.findById(clientId);
+
+        if (documentOptional.isEmpty() || clientOptional.isEmpty()) {
+            throw new Exception("Pas le bon id de document ou du client");
+        }
+        var client = clientOptional.get();
+        var document = documentOptional.get();
+
+        if (!document.isDisponible()) {
+            throw new Exception("Le document est deja emprunte");
+        }
+
+        setDureeDocument(document);
+        Emprunt emprunt = new Emprunt(LocalDate.now(), client, document);
+        emprunt.setDateRetour(LocalDate.now().plusDays(document.getDureeEmprunt()));
+        client.addEmprunt(emprunt);
+        document.setDisponible(false);
+
+        EmpruntDTO empruntDTO = new EmpruntDTO(emprunt);
+        return emprunt;
+    }
+
+    @Transactional
+    public EmpruntDTO createEmprunt(Emprunt emprunt) throws Exception {
+        EmpruntDTO empruntDTO = new EmpruntDTO( createEmprunt(emprunt.getClient(),emprunt.getDocument()));
+        return empruntDTO;
+    }
 
 //    @Transactional
 //    public void retourDocument(Emprunt emprunt) {
@@ -137,15 +145,15 @@ public class EmployeService {
 //        empruntRepository.save(emprunt);
 //    }
 //
-//    public void setDureeDocument(Document document) {
-//        if (livreRepository.findById(document.getId()).isPresent()) {
-//            document.setDureeEmprunt(EMPRUNT_LIVRE_EN_JOURNEE);
-//        } else if (dvdRepository.findById(document.getId()).isPresent()) {
-//            document.setDureeEmprunt(EMPRUNT_DVD_EN_JOURNEE);
-//        } else {
-//            document.setDureeEmprunt(EMPRUNT_CD_EN_JOURNEE);
-//        }
-//    }
+    public void setDureeDocument(Document document) {
+        if (livreRepository.findById(document.getId()).isPresent()) {
+            document.setDureeEmprunt(EMPRUNT_LIVRE_EN_JOURNEE);
+        } else if (dvdRepository.findById(document.getId()).isPresent()) {
+            document.setDureeEmprunt(EMPRUNT_DVD_EN_JOURNEE);
+        } else {
+            document.setDureeEmprunt(EMPRUNT_CD_EN_JOURNEE);
+        }
+    }
 
     public List<ClientDTO> findAllClient() {
         List<ClientDTO> listeDTO = new ArrayList<>();
@@ -182,6 +190,43 @@ public class EmployeService {
         List<DvdDTO> listeDTO = new ArrayList<>();
         for(Dvd dvd : dvdRepository.findAll()){
             listeDTO.add(new DvdDTO(dvd));
+        }
+
+        return listeDTO;
+    }
+
+
+//
+//    public Optional<Livre> findLivreById(long id) {
+//        return livreRepository.findById(id);
+//    }
+//
+    public List<EmpruntDTO> findAllEmprunt() {
+        List<EmpruntDTO> listeDTO = new ArrayList<>();
+        for(Emprunt emprunt : empruntRepository.findAll()){
+            listeDTO.add(new EmpruntDTO(emprunt));
+        }
+
+        return listeDTO;
+    }
+//
+//    public Optional<Emprunt> findEmpruntById(long empruntId) {
+//        return empruntRepository.findById(empruntId);
+//    }
+
+    public List<DocumentDTO> findDocumentByTitre(String titre){
+        List<DocumentDTO> listeDTO = new ArrayList<>();
+        for(Document document : documentRepository.getDocumentByTitre(titre)){
+            listeDTO.add(new DocumentDTO(document));
+        }
+
+        return listeDTO;
+    }
+
+    public List<DocumentDTO> findDocumentByAuteur(String auteur){
+        List<DocumentDTO> listeDTO = new ArrayList<>();
+        for(Document document : documentRepository.getDocumentByAuteur(auteur)){
+            listeDTO.add(new DocumentDTO(document));
         }
 
         return listeDTO;
@@ -225,17 +270,4 @@ public class EmployeService {
 
         return listeDTO;
     }
-//
-//    public Optional<Livre> findLivreById(long id) {
-//        return livreRepository.findById(id);
-//    }
-//
-//    public List<Emprunt> findAllEmprunt() {
-//        return empruntRepository.findAll();
-//    }
-//
-//    public Optional<Emprunt> findEmpruntById(long empruntId) {
-//        return empruntRepository.findById(empruntId);
-//    }
-
 }
