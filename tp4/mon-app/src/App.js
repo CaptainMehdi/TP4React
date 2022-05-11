@@ -8,6 +8,9 @@ import AdminAddClient from "./components/Admin/AdminAddClient";
 import AdminAddDocuments from "./components/Admin/AdminAddDocuments";
 import Emprunts from "./components/Admin/Emprunts";
 import RetourEmprunt from "./components/Admin/RetourEmprunt";
+import AddLivre from "./components/Admin/AddLivre";
+import AddCd from "./components/Admin/AddCd";
+import AddDvd from "./components/Admin/AddDvd";
 
 function App() {
 
@@ -27,6 +30,10 @@ function App() {
                         <Route  path="/emprunts" element={<Emprunts/>} />
                         <Route  path="/retourEmprunt" element={<RetourEmprunt/>}/>
                         <Route  path="/user" element={<ChoixUser/>}/>
+                        <Route  path= "/addLivre" element={<AddLivre/>}/>
+                        <Route  path= "/addCd" element={<AddCd/>}/>
+                        <Route  path= "/addDvd" element={<AddDvd/>}/>
+
                     </Routes>
                 </div>
             </Router>

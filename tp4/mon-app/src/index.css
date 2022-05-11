@@ -187,3 +187,11 @@ display: inline-table;
 .btnlien{
   text-decoration: none;
 }
+
+.tableElement{
+  background-color: #282c34;
+  border-radius: 8px;
+  color: white;
+  margin:10px;
+  padding: 10px;
+}

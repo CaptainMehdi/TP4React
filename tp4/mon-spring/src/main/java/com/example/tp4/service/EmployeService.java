@@ -1,6 +1,6 @@
 package com.example.tp4.service;
 
-import com.example.tp4.DTO.ClientDTO;
+import com.example.tp4.DTO.*;
 import com.example.tp4.model.Emprunt;
 import com.example.tp4.model.document.Cd;
 import com.example.tp4.model.document.Document;
@@ -53,30 +53,39 @@ public class EmployeService {
         return clientRepository.save(dtoC.DTOtoClient());
     }
 
-//    public Livre saveLivre(Livre livre) {
-//        return livreRepository.save(livre);
-//    }
-//
-//    public Livre saveLivre(String titre, String auteur, int datePublication, String categorie, boolean dispo, String editeur, int nombrePage) {
-//        return livreRepository.save(new Livre(titre, auteur, datePublication, categorie, dispo, editeur, nombrePage));
-//    }
-//
-//    public Dvd saveDvd(Dvd dvd) {
-//        return dvdRepository.save(dvd);
-//    }
-//
-//    public Dvd saveDvd(String titre, String auteur, int datePublication, String categorie, boolean dispo, int duree) {
-//        return dvdRepository.save(new Dvd(titre, auteur, datePublication, categorie, dispo, duree));
-//    }
-//
-//    public Cd saveCd(Cd cd) {
-//        return cdRepository.save(cd);
-//    }
-//
-//    public Cd saveCd(String titre, String auteur, int datePublication, String categorie, boolean dispo, int duree) {
-//        return cdRepository.save(new Cd(titre, auteur, datePublication, categorie, dispo, duree));
-//    }
-//
+    public LivreDTO saveLivre(Livre livre) {
+        livreRepository.save(livre);
+        return new LivreDTO(livre);
+    }
+
+    public Livre saveLivre(String titre, String auteur, int datePublication, String categorie, boolean dispo, String editeur, int nombrePage) {
+        Livre livre = new Livre(titre, auteur, datePublication, categorie, dispo, editeur, nombrePage);
+        LivreDTO livreDTO = new LivreDTO(livre);
+        return livreRepository.save(livre);
+    }
+
+    public DvdDTO saveDvd(Dvd dvd) {
+        dvdRepository.save(dvd);
+        return new DvdDTO(dvd);
+    }
+
+    public Dvd saveDvd(String titre, String auteur, int datePublication, String categorie, boolean dispo, int duree) {
+        Dvd dvd = new Dvd(titre, auteur, datePublication, categorie, dispo, duree);
+        DvdDTO dvdDTO =new DvdDTO(dvd);
+        return dvdRepository.save(dvd);
+    }
+
+    public CdDTO saveCd(Cd cd) {
+        cdRepository.save(cd);
+        return new CdDTO(cd);
+    }
+
+    public Cd saveCd(String titre, String auteur, int datePublication, String categorie, boolean dispo, int duree) {
+        Cd cd = new Cd(titre, auteur, datePublication, categorie, dispo, duree);
+        CdDTO cdDTO = new CdDTO(cd);
+        return cdRepository.save(cd);
+    }
+
 //    @Transactional
 //    public Emprunt createEmprunt(Client client, Document document) throws Exception {
 //        if (!document.isDisponible()) {
@@ -151,9 +160,71 @@ public class EmployeService {
 //        return clientRepository.findById(id);
 //    }
 //
-//    public List<Livre> findAllLivre() {
-//        return livreRepository.findAll();
-//    }
+    public List<LivreDTO> findAllLivre() {
+        List<LivreDTO> listeDTO = new ArrayList<>();
+        for(Livre c : livreRepository.findAll()){
+            listeDTO.add(new LivreDTO(c));
+        }
+
+        return listeDTO;
+    }
+
+    public List<CdDTO> findAllCd(){
+        List<CdDTO> listeDTO = new ArrayList<>();
+        for(Cd c : cdRepository.findAll()){
+            listeDTO.add(new CdDTO(c));
+        }
+
+        return listeDTO;
+    }
+
+    public List<DvdDTO> findAllDvd(){
+        List<DvdDTO> listeDTO = new ArrayList<>();
+        for(Dvd dvd : dvdRepository.findAll()){
+            listeDTO.add(new DvdDTO(dvd));
+        }
+
+        return listeDTO;
+    }
+
+    public List<DocumentDTO> findAllDocument(){
+        List<DocumentDTO> listeDTO = new ArrayList<>();
+        for(Document document : documentRepository.findAll()){
+            listeDTO.add(new DocumentDTO(document) {
+                @Override
+                public String getId() {
+                    return super.getId();
+                }
+
+                @Override
+                public String getTitre() {
+                    return super.getTitre();
+                }
+
+                @Override
+                public String getAuteur() {
+                    return super.getAuteur();
+                }
+
+                @Override
+                public String getDatePublication() {
+                    return super.getDatePublication();
+                }
+
+                @Override
+                public String getCategorie() {
+                    return super.getCategorie();
+                }
+
+                @Override
+                public String getDisponible() {
+                    return super.getDisponible();
+                }
+            });
+        }
+
+        return listeDTO;
+    }
 //
 //    public Optional<Livre> findLivreById(long id) {
 //        return livreRepository.findById(id);

@@ -1,6 +1,7 @@
 import React from "react";
 import FooterAdmin from "./FooterAdmin";
 import {useState, useEffect} from "react";
+import {Link} from "react-router-dom";
 
 const AdminAddClient = () => {
 
@@ -24,7 +25,7 @@ const AdminAddClient = () => {
             return
         }
         const client = {nom, prenom, adresse}
-        fetch("http://localhost:2002/todos/add", {
+        fetch("http://localhost:2002/todos/addClients", {
             method: "POST",
             headers: {"Content-type": "application/json"},
             body: JSON.stringify(client)
@@ -46,7 +47,7 @@ const AdminAddClient = () => {
     }, [])
 
     const fetchClient = async () => {
-        const res = await fetch('http://localhost:2002/todos/getAll')
+        const res = await fetch('http://localhost:2002/todos/getAllClients')
         const data = await res.json()
         return data
     }
@@ -82,13 +83,15 @@ const AdminAddClient = () => {
                 <div style={{margin: "5px"}}>
                     Liste de Clients :
                     <br/>
-                    {clients.map((client) =>(
-                        <div key={client.id}>
-                            {client.nom}
-                            {client.prenom}
-                            {client.adresse}
-                        </div>
-                    ))}
+                        {clients.map((client) =>(
+                            <div className="tableElement" key={client.id}>
+                                <h5>ID: {client.id}</h5>
+                                <h5>Nom: {client.nom}</h5>
+                                <h5>Prenom: {client.prenom}</h5>
+                                <h5>Adresse: {client.adresse}</h5>
+                            </div>
+                        ))}
+
                 </div>
             </div>
             <FooterAdmin/>
